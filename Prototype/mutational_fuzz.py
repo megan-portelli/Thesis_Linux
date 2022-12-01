@@ -27,7 +27,7 @@ def load_urls(folder):
     for path in folder:
         for file in os.listdir(path):
             if file.endswith('.txt'):
-                file1 = open(path+file, 'r', encoding='utf-8', errors='ignore')
+                file1 = open(path+file, 'r', encoding='utf-8')#, errors='ignore')
                 Lines = file1.read().splitlines()
                 file1.close()
                 for line in Lines: 
@@ -84,7 +84,7 @@ def flip_random_character(data):
 def create_new(data):
     path = "mutation_output/mutation_urls.txt"
     try:
-        with open(path, 'a') as f:
+        with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
     except Exception as e:
         print(e)
