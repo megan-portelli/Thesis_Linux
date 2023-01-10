@@ -45,7 +45,7 @@ URL_GRAMMAR: Grammar = {
     "<word>":
         ["<alpha>", "<alpha><alpha>", "<alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha><alpha>",
         "<alpha><alpha><alpha><alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha><alpha><alpha><alpha>", 
-        "<alpha><alpha><alpha><alpha><alpha><alpha><alpha><alpha>"],
+        "<alpha><alpha><alpha><alpha><alpha><alpha><alpha><alpha>"], #Changed this from word because I was getting almost infinite looking words
 
     "<digit>":
         ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
@@ -75,6 +75,7 @@ def nonterminals(expansion):
 
     return RE_NONTERMINAL.findall(expansion)
 
+#Will generate a URL based on the grammar provided
 def generateInputs(grammar, start_symbol = START_SYMBOL, max_nonterminals = 10, max_expansion_trials=100, log=False):
     term = start_symbol
     expansionTrials = 0
@@ -110,8 +111,9 @@ def main():
     for i in range(5):
         url_lines.append(generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10))
     
+    #Writing to file just to have them in a separate text file
     for url in url_lines:
-        print(url)
+        create_new(url)
 
     execute_fuzz()
 
