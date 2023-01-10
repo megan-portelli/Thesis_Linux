@@ -1,5 +1,4 @@
 from typing import List, Dict, Tuple
-import os
 import random
 import subprocess
 import re
@@ -70,15 +69,13 @@ parsers = [
     ["parsers/yuarel_V2016/main", "%s", ["Invalid URL"] ]
 ]
 
-#https://www.fuzzingbook.org/html/Grammars.html
-
 def nonterminals(expansion):
     if isinstance(expansion, tuple):
         expansion = expansion[0]
 
     return RE_NONTERMINAL.findall(expansion)
 
-def generateInputs(grammar, start_symbol = START_SYMBOL, max_nonterminals = 10, max_expansion_trials=50, log=False):
+def generateInputs(grammar, start_symbol = START_SYMBOL, max_nonterminals = 10, max_expansion_trials=100, log=False):
     term = start_symbol
     expansionTrials = 0
 
@@ -111,7 +108,10 @@ def create_new(data):
 
 def main():
     for i in range(5):
-        url_lines.append(generateInputs(grammar=URL_GRAMMAR, max_nonterminals=5))
+        url_lines.append(generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10))
+    
+    for url in url_lines:
+        print(url)
 
     execute_fuzz()
 
