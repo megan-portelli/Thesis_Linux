@@ -2,6 +2,11 @@ from typing import List, Dict, Tuple
 import random
 import subprocess
 import re
+import robert
+
+#SEPARATE METHODS WHICH ARE TAKEN FROM FUZZING BOOK INTO SEPARATE CLASSES
+#WRITE POINTS FOR METHODOLOGY AFTER CONFIRMING AND UNDERSTANDING HOW IT WORKS
+#LOOK FOR PARSERS
 
 Grammar = Dict[str, List[Tuple]]
 
@@ -109,7 +114,7 @@ def create_new(data):
 
 def main():
     for i in range(5):
-        url_lines.append(generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10))
+        url_lines.append(generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=True))
     
     #Writing to file just to have them in a separate text file
     for url in url_lines:
@@ -143,4 +148,6 @@ def get_output(result):
     output = result.stderr.decode('utf-8')
     return output
 
-main()
+if __name__ == "__main__":
+    main()
+    robert.test()
