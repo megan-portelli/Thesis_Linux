@@ -2,7 +2,6 @@ from typing import List, Dict, Tuple
 import subprocess
 import FuzzingBook_Generational
 
-#SEPARATE METHODS WHICH ARE TAKEN FROM FUZZING BOOK INTO SEPARATE CLASSES
 #WRITE POINTS FOR METHODOLOGY AFTER CONFIRMING AND UNDERSTANDING HOW IT WORKS
 #LOOK FOR PARSERS
 
@@ -79,8 +78,8 @@ def create_new(data):
 
 
 def main():
-    for i in range(1500):
-        url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=True))
+    for i in range(2000):
+        url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
     
     #Writing to file just to have them in a separate text file
     for url in url_lines:
