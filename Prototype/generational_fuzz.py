@@ -1,17 +1,12 @@
 from typing import List, Dict, Tuple
-import random
 import subprocess
-import re
-import robert
+import FuzzingBook_Generational
 
 #SEPARATE METHODS WHICH ARE TAKEN FROM FUZZING BOOK INTO SEPARATE CLASSES
 #WRITE POINTS FOR METHODOLOGY AFTER CONFIRMING AND UNDERSTANDING HOW IT WORKS
 #LOOK FOR PARSERS
 
 Grammar = Dict[str, List[Tuple]]
-
-START_SYMBOL = "<start>"
-RE_NONTERMINAL = re.compile(r'(<[^<> ]*>)')
 
 URL_GRAMMAR: Grammar = {
     "<start>":
@@ -36,7 +31,7 @@ URL_GRAMMAR: Grammar = {
         [".com", ".net", ".org", ".edu", ".gov", ".<alpha><alpha>", ".<alpha><alpha><alpha>"],   
 
     "<scheme>":
-        ["http", "https"], #do I also add word to have any combination of letters? Personally, I dont think its ideal
+        ["http", "https"],
 
     "<reserved_characters>":
         [";", "/", "?", ":", "@", "&", "=", "+", "$", "#"],
@@ -50,7 +45,7 @@ URL_GRAMMAR: Grammar = {
     "<word>":
         ["<alpha>", "<alpha><alpha>", "<alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha><alpha>",
         "<alpha><alpha><alpha><alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha><alpha><alpha><alpha>", 
-        "<alpha><alpha><alpha><alpha><alpha><alpha><alpha><alpha>"], #Changed this from word because I was getting almost infinite looking words
+        "<alpha><alpha><alpha><alpha><alpha><alpha><alpha><alpha>"],
 
     "<digit>":
         ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
@@ -74,35 +69,6 @@ parsers = [
     ["parsers/yuarel_V2016/main", "%s", ["Invalid URL"] ]
 ]
 
-def nonterminals(expansion):
-    if isinstance(expansion, tuple):
-        expansion = expansion[0]
-
-    return RE_NONTERMINAL.findall(expansion)
-
-#Will generate a URL based on the grammar provided
-def generateInputs(grammar, start_symbol = START_SYMBOL, max_nonterminals = 10, max_expansion_trials=100, log=False):
-    term = start_symbol
-    expansionTrials = 0
-
-    while len(nonterminals(term)) > 0:
-        symbolToExpand = random.choice(nonterminals(term))
-        expansions = grammar[symbolToExpand]
-        expansion = random.choice(expansions)
-        newTerm = term.replace(symbolToExpand, expansion, 1)
-
-        if len(nonterminals(newTerm)) < max_nonterminals:
-            term = newTerm
-            if log:
-                print("%-40s" % (symbolToExpand + " -> " +expansion), term)
-            expansionTrials = 0
-        else:
-            expansionTrials += 1
-            if expansionTrials >= max_expansion_trials:
-                print("Cannot expand "+repr(term))
-    
-    return term
-
 def create_new(data):
     path = "grammarGeneration_output/generational_urls.txt"
     try:
@@ -113,8 +79,8 @@ def create_new(data):
 
 
 def main():
-    for i in range(5):
-        url_lines.append(generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=True))
+    for i in range(1500):
+        url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=True))
     
     #Writing to file just to have them in a separate text file
     for url in url_lines:
@@ -150,4 +116,3 @@ def get_output(result):
 
 if __name__ == "__main__":
     main()
-    robert.test()

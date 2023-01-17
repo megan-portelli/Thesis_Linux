@@ -1,6 +1,6 @@
 import os
-import random
 import subprocess
+import FuzzingBook_Mutational
 
 url_lines = []
 
@@ -40,45 +40,13 @@ def main():
     for url in url_lines:
         counter = 0
         while counter < 5:
-            mutated_url = mutate(url)
+            mutated_url = FuzzingBook_Mutational.mutate(url)
             create_new(mutated_url)
             counter+=1
     
     load_urls(mutation_folder)
     execute_fuzz()
 
-#MUTATION ENGINE
-def mutate(data):
-    #Returns data with a random bit flipped in a random position
-    if data == "":
-        return data
-
-    mutators = [
-        delete_random_character,
-        insert_random_character,
-        flip_random_character
-    ]
-
-    mutator = random.choice(mutators)
-
-    return mutator(data)
-
-def delete_random_character(data):
-    pos = random.randint(0, len(data)-1)
-    return data[:pos] + data[pos + 1:]
-
-def insert_random_character(data):
-    #Inserting random characters
-    pos = random.randint(0, len(data))
-    random_character = chr(random.randrange(32,127))
-    return data[:pos] + random_character + data[pos:]
-
-def flip_random_character(data): 
-    pos = random.randint(0, len(data) - 1)
-    c = data[pos]
-    bit = 1 << random.randint(0,6)
-    new_c = chr(ord(c)^bit)
-    return data[:pos] + new_c + data[pos+1:]
 
 #Write new mutated URL to text file
 def create_new(data):
