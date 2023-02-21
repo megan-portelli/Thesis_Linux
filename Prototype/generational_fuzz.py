@@ -2,9 +2,6 @@ from typing import List, Dict, Tuple
 import subprocess
 import FuzzingBook_Generational
 
-#WRITE POINTS FOR METHODOLOGY AFTER CONFIRMING AND UNDERSTANDING HOW IT WORKS
-#LOOK FOR PARSERS
-
 Grammar = Dict[str, List[Tuple]]
 
 URL_GRAMMAR: Grammar = {
@@ -76,9 +73,16 @@ def create_new(data):
     except Exception as e:
         print(e)
 
+def write_errors(data):
+    path = "grammarGeneration_output/Results.txt"
+    try:
+        with open(path, 'a', encoding="utf-8") as f:
+            f.write(data+"\n")
+    except Exception as e:
+        print(e)
 
 def main():
-    for i in range(2000):
+    for i in range(5000):
         url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
     
     #Writing to file just to have them in a separate text file
@@ -90,6 +94,7 @@ def main():
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[0])
+        write_errors('----- Parser: %s -----' % parser[0])
         for url in url_lines:
             param = parser[1] % url
             try:
@@ -106,8 +111,10 @@ def execute_fuzz():
                             
                     if not expected or result.returncode != 0:
                         print(result)
+                        write_errors(str(result))
             except subprocess.TimeoutExpired:
                 print('Timed out', param)
+                write_errors('Timed out: %s' % param)
 
 def get_output(result):
     output = result.stderr.decode('utf-8')

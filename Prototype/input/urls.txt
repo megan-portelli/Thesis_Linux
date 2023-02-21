@@ -96,3 +96,5 @@ data:/../
 ssh-http-ftp://google.com
 http://www.google.com:port/some/path/?thefragment=true#withhash?another
 htr:/\/example\path?A   8.com/#\
+https://zxr.com:8932/ah? # 
+http://xjft.org/hw

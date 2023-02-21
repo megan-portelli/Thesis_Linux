@@ -39,7 +39,7 @@ def main():
 
     for url in url_lines:
         counter = 0
-        while counter < 5:
+        while counter < 51:
             mutated_url = FuzzingBook_Mutational.mutate(url)
             create_new(mutated_url)
             counter+=1
@@ -47,10 +47,16 @@ def main():
     load_urls(mutation_folder)
     execute_fuzz()
 
-
-#Write new mutated URL to text file
 def create_new(data):
     path = "mutation_output/mutation_urls.txt"
+    try:
+        with open(path, 'a', encoding="utf-8") as f:
+            f.write(data+"\n")
+    except Exception as e:
+        print(e)
+
+def write_errors(data):
+    path = "mutation_output/Results.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
@@ -60,6 +66,7 @@ def create_new(data):
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[0])
+        write_errors('----- Parser: %s -----' % parser[0])
         for url in url_lines:
             param = parser[1] % url
             try:
@@ -76,8 +83,10 @@ def execute_fuzz():
                             
                     if not expected or result.returncode != 0:
                         print(result)
+                        write_errors(str(result))
             except subprocess.TimeoutExpired:
                 print('Timed out', param)
+                write_errors('Timed out: %s' % param)
 
 def get_output(result):
     output = result.stderr.decode('utf-8')
