@@ -12,7 +12,9 @@ parsers = [
     ["parsers/url.h/main", "%s", ["Invalid URL"] ],
     ["parsers/url.h_V2013/main", "%s", ["Invalid URL"] ],
     ["parsers/yuarel/main", "%s", ["Invalid URL"] ],
-    ["parsers/yuarel_V2016/main", "%s", ["Invalid URL"] ]
+    ["parsers/yuarel_V2016/main", "%s", ["Invalid URL"] ],
+    ["parsers/furl/main", "%s", ["Invalid URL"] ],
+    ["parsers/py-url-parser/main", "%s", ["Invalid URL"] ]
 ]
 
 input_folders = [
