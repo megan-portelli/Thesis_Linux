@@ -1,0 +1,12 @@
+
+URL: http://youtube.com The HTTP request to the remote WebDriver server for URL http://localhost:58238/session/95784911-5123-4d37-a98f-59d7d7207066/url timed out after 60 seconds.
+URL: http://aa[2001:db8::1:8080]/foo	 Malformed URL: URL constructor: http://aa[2001:db8::1:8080]/foo	 is not a valid URL.
+URL: foo/ba:r Malformed URL: URL constructor: foo/ba:r is not a valid URL.
+URL: file:///foo/bar The HTTP request to the remote WebDriver server for URL http://localhost:58238/session/95784911-5123-4d37-a98f-59d7d7207066/url timed out after 60 seconds.
+URL: ?bar=baz#qux The HTTP request to the remote WebDriver server for URL http://localhost:58238/session/95784911-5123-4d37-a98f-59d7d7207066/url timed out after 60 seconds.
+URL: http:\\\\a\\b:c\\d@foo.com\\ The HTTP request to the remote WebDriver server for URL http://localhost:58238/session/95784911-5123-4d37-a98f-59d7d7207066/url timed out after 60 seconds.
+URL: madeupscheme:/example.com/ The HTTP request to the remote WebDriver server for URL http://localhost:58238/session/95784911-5123-4d37-a98f-59d7d7207066/url timed out after 60 seconds.
+URL: sc://�.test/ Reached error page: about:neterror?e=unknownProtocolFound&u=sc%3A//%25EF%25BF%25BD.test/&c=UTF-8&d=Firefox%20doesn%E2%80%99t%20know%20how%20to%20open%20this%20address%2C%20because%20one%20of%20the%20following%20protocols%20%28sc%29%20isn%E2%80%99t%20associated%20with%20any%20program%20or%20is%20not%20allowed%20in%20this%20context.
+URL: htr:/\/example\path?A   8.com/#\ Reached error page: about:neterror?e=unknownProtocolFound&u=htr%3A/%5C/example%5Cpath%3FA%20%20%208.com/%23%5C&c=UTF-8&d=Firefox%20doesn%E2%80%99t%20know%20how%20to%20open%20this%20address%2C%20because%20one%20of%20the%20following%20protocols%20%28htr%29%20isn%E2%80%99t%20associated%20with%20any%20program%20or%20is%20not%20allowed%20in%20this%20context.
+URL: http://127.0.0.1:10100/relative_import.html Reached error page: about:neterror?e=connectionFailure&u=http%3A//127.0.0.1%3A10100/relative_import.html&c=UTF-8&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20127.0.0.1%3A10100.
+URL: h\tt\nt\rp://h\to\ns\rt:9\t0\n0\r0/p\ta\nt\rh?q\tu\ne\rry#f\tr\na\rg Malformed URL: URL constructor: h\tt\nt\rp://h\to\ns\rt:9\t0\n0\r0/p\ta\nt\rh?q\tu\ne\rry#f\tr\na\rg is not a valid URL.
