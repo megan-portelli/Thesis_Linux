@@ -1,11 +1,8 @@
 from furl import furl
 import sys
 
-#pip install furl
-
+url = sys.argv[1]
 try:
-    url = sys.argv[1]
     f = furl(url)
-    print("Successful parse")
 except Exception as e:
-    print (e) + "Invalid URL"
+    print("Exception occurred for url '"+ url + "': "+ str(type(e)))
