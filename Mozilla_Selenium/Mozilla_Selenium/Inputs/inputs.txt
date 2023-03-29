@@ -1,0 +1,13 @@
+http://google.com
+http://youtube.com
+http://aa[2001:db8::1:8080]/foo	
+foo/ba:r
+file:///foo/bar
+?bar=baz#qux
+http:\\\\a\\b:c\\d@foo.com\\
+madeupscheme:/example.com/
+http://foo:@example.com/bar
+sc://ñ.test/
+htr:/\/example\path?A   8.com/#\
+http://127.0.0.1:10100/relative_import.html
+h\tt\nt\rp://h\to\ns\rt:9\t0\n0\r0/p\ta\nt\rh?q\tu\ne\rry#f\tr\na\rg

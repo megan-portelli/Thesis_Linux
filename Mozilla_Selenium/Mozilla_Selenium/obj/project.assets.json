@@ -111,11 +111,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Win10 User\\source\\repos\\Thesis\\Mozilla_Selenium\\Mozilla_Selenium\\Mozilla_Selenium.csproj",
+      "projectUniqueName": "C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Mozilla_Selenium.csproj",
       "projectName": "Mozilla_Selenium",
-      "projectPath": "C:\\Users\\Win10 User\\source\\repos\\Thesis\\Mozilla_Selenium\\Mozilla_Selenium\\Mozilla_Selenium.csproj",
+      "projectPath": "C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Mozilla_Selenium.csproj",
       "packagesPath": "C:\\Users\\Win10 User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Win10 User\\source\\repos\\Thesis\\Mozilla_Selenium\\Mozilla_Selenium\\obj\\",
+      "outputPath": "C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Win10 User\\AppData\\Roaming\\NuGet\\NuGet.Config",
