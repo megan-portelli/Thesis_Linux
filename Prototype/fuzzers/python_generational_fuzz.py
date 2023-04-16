@@ -55,10 +55,12 @@ URL_GRAMMAR: Grammar = {
 url_lines = []
 
 parsers = [
-    ["python3","./parsers/furl/main.py", "%s", ["Invalid URL"] ],
-    ["python3","./parsers/py-url-parser/main.py", "%s", ["Invalid URL"] ],
-    ["python3","./parsers/whatwg-url/main.py", "%s", ["Invalid URL"] ],
+    ["python3","./parsers/furl/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-url-parser/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
 ]
+
+
 
 def create_new(data):
     path = "./grammarGeneration_output/generational_urls.txt"
