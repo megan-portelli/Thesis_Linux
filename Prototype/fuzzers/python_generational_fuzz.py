@@ -56,9 +56,11 @@ URL_GRAMMAR: Grammar = {
 url_lines = []
 
 parsers = [
-    ["python3","./parsers/furl/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-furl/main.py", '"%s"', ["Invalid URL"] ],
     ["python3","./parsers/py-url-parser/main.py", '"%s"', ["Invalid URL"] ],
-    ["python3","./parsers/whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-urltools/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-p.url/main.py", '"%s"', ["Invalid URL"] ],
 ]
 
 
