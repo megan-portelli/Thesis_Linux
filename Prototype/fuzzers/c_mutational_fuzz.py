@@ -1,20 +1,22 @@
 import os
 import subprocess
 import FuzzingBook_Mutational
+from datetime import datetime
+
 
 url_lines = []
 
 parsers = [
-    ["./parsers/c-url-parser/main", "%s", ["Invalid URL"] ],
-    ["./parsers/liburl/main", "%s", ["Invalid URL"] ],
-    ["./parsers/liburl_V2015/main", "%s", ["Invalid URL"] ],
-    ["./parsers/url-parser-c/main", "%s", ["Invalid URL"] ],
-    ["./parsers/url.h/main", "%s", ["Invalid URL"] ],
-    ["./parsers/url.h_V2013/main", "%s", ["Invalid URL"] ],
-    ["./parsers/yuarel/main", "%s", ["Invalid URL"] ],
-    ["./parsers/yuarel_V2016/main", "%s", ["Invalid URL"] ],
-    ["./parsers/furl/main", "%s", ["Invalid URL"] ],
-    ["./parsers/py-url-parser/main", "%s", ["Invalid URL"] ]
+    ["./parsers/c-url-parser/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/liburl/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/liburl_V2015/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/url-parser-c/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/url.h/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/url.h_V2013/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/yuarel/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/yuarel_V2016/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/furl/main", '"%s"', ["Invalid URL"] ],
+    ["./parsers/py-url-parser/main", '"%s"', ["Invalid URL"] ]
 ]
 
 input_folders = [
@@ -58,7 +60,7 @@ def create_new(data):
         print(e)
 
 def write_errors(data):
-    path = "./mutation_output/Results.txt"
+    path = "./mutation_output/C_Results.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
@@ -68,7 +70,7 @@ def write_errors(data):
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[0])
-        write_errors('----- Parser: %s -----' % parser[0])
+        write_errors('----- Parser: %s '+  str(datetime.date()) + ' -----' % parser[0])
         for url in url_lines:
             param = parser[1] % url
             try:

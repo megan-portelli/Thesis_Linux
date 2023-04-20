@@ -1,6 +1,0 @@
------ Parser: ./parsers/furl/main.py -----
------ Parser: ./parsers/py-url-parser/main.py -----
------ Parser: ./parsers/whatwg-url/main.py -----
------ Parser: ./parsers/furl/main.py -----
------ Parser: ./parsers/py-url-parser/main.py -----
------ Parser: ./parsers/whatwg-url/main.py -----

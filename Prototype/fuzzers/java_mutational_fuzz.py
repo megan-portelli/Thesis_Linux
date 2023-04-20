@@ -1,64 +1,48 @@
-from typing import List, Dict, Tuple
+import os
 import subprocess
-import FuzzingBook_Generational
+import FuzzingBook_Mutational
 from datetime import datetime
 
-Grammar = Dict[str, List[Tuple]]
-
-URL_GRAMMAR: Grammar = {
-    "<start>":
-        ["<url>"], 
-
-    "<url>":
-        ["<scheme>://<authority>/<path>" ,"<scheme>://<authority>/<path>?<query>#<fragment>"],
-
-    "<fragment>":
-        ["<word>&<word>&<fragment>", "<word>", " "],
-
-    "<query>":
-        ["<word>=<word>&<query>", "<word>=<word>&<query>", " "],
-    
-    "<path>":
-        ["<word>/<word>/<path>", "<word>"],
-
-    "<authority>":
-        ["<word><domain>:<port>", "<word><domain>"],
-
-    "<domain>":
-        [".com", ".net", ".org", ".edu", ".gov", ".<alpha><alpha>", ".<alpha><alpha><alpha>"],   
-
-    "<scheme>":
-        ["http", "https"],
-
-    "<reserved_characters>":
-        [";", "/", "?", ":", "@", "&", "=", "+", "$", "#"],
-    
-    "<port>":
-        ["<digit><digit>", "<digit><digit><digit>" ,"<digit><digit><digit><digit>",  "<digit><digit><digit><digit><digit>"],
-
-    "<integer>":
-        ["<digit><integer>", "<digit>"],
-
-    "<word>":
-        ["<alpha>", "<alpha><alpha>", "<alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha><alpha>",
-        "<alpha><alpha><alpha><alpha><alpha><alpha>", "<alpha><alpha><alpha><alpha><alpha><alpha><alpha>", 
-        "<alpha><alpha><alpha><alpha><alpha><alpha><alpha><alpha>"],
-
-    "<digit>":
-        ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-    
-    "<alpha>":
-        ["a", "b", "c", "d", "e", "f", "g", "h" , 
-        "i", "j", "k", "l", "m", "n", "o", "p", "q", 
-        "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-}
 
 url_lines = []
 
 parsers = []
 
+input_folders = [
+    "./input/",
+]
+
+mutation_folder = [
+    "./mutation_output/",
+]
+
+def load_urls(folder):
+    for path in folder:
+        for file in os.listdir(path):
+            if file.endswith('.txt'):
+                file1 = open(path+file, 'r', encoding='utf-8')#, errors='ignore')
+                Lines = file1.read().splitlines()
+                file1.close()
+                for line in Lines: 
+                    url_lines.append(line)
+
+
+def main():    
+    load_urls(input_folders)
+
+    for url in url_lines:
+        counter = 0
+        while counter < 51:
+            mutated_url = FuzzingBook_Mutational.mutate(url)
+            create_new(mutated_url)
+            counter+=1
+    
+    load_urls(mutation_folder)
+    galimatias_execute_fuzz()
+    jurl_execute_fuzz()
+
 def create_new(data):
-    path = "./grammarGeneration_output/generational_urls.txt"
+    path = "./mutation_output/mutation_urls.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
@@ -71,17 +55,6 @@ def write_errors(data, path):
             f.write(data+"\n")
     except Exception as e:
         print(e)
-
-def main():
-    for i in range(2):
-        url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
-    
-    #Writing to file just to have them in a separate text file
-    for url in url_lines:
-        create_new(url)
-
-    galimatias_execute_fuzz()
-    jurl_execute_fuzz()
 
 def galimatias_execute_fuzz(): 
     print('----- Galimatias Java Parser: -----')
@@ -102,7 +75,7 @@ def galimatias_execute_fuzz():
                         
                 if not expected or result.returncode != 0:
                     print(result)
-                    write_errors(str(result), "./grammarGeneration_output/GalimatiasJavaResults.txt")
+                    write_errors(str(result), "./mutation_output/GalimatiasJavaResults.txt")
         except subprocess.TimeoutExpired:
             print('Timed out', url)
             write_errors('Timed out: %s' % url)
@@ -126,15 +99,13 @@ def jurl_execute_fuzz():
                         
                 if not expected or result.returncode != 0:
                     print(result)
-                    write_errors(str(result), "./grammarGeneration_output/JurlJavaResults.txt")
+                    write_errors(str(result), "./mutation_output/JurlJavaResults.txt")
         except subprocess.TimeoutExpired:
             print('Timed out', url)
             write_errors('Timed out: %s' % url)
- 
 
 def get_output(result):
-    output = result.stdout.decode('utf-8')
+    output = result.stderr.decode('utf-8')
     return output
 
-if __name__ == "__main__":
-    main()
+main()

@@ -1,6 +1,7 @@
 from typing import List, Dict, Tuple
 import subprocess
 import FuzzingBook_Generational
+from datetime import datetime
 
 Grammar = Dict[str, List[Tuple]]
 
@@ -91,7 +92,7 @@ def main():
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[1])
-        write_errors('----- Parser: %s -----' % parser[1])
+        write_errors('----- Parser: %s '+  str(datetime.date()) + '-----' % parser[1])
         for url in url_lines:
             param = parser[2] % url
             try:
