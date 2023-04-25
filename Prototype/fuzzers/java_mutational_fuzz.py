@@ -1,8 +1,6 @@
 import os
 import subprocess
 import FuzzingBook_Mutational
-from datetime import datetime
-
 
 url_lines = []
 
@@ -58,7 +56,7 @@ def write_errors(data, path):
 
 def galimatias_execute_fuzz(): 
     print('----- Galimatias Java Parser: -----')
-    write_errors('----- Galimatias Java Parser '+  str(datetime.date()) + ': -----', "./grammarGeneration_output/GalimatiasJavaResults.txt")
+    write_errors('----- Galimatias Java Parser : -----', "./grammarGeneration_output/GalimatiasJavaResults.txt")
     for url in url_lines:
         try:
             print()
@@ -82,7 +80,7 @@ def galimatias_execute_fuzz():
 
 def jurl_execute_fuzz():
     print('----- Jurl Java Parser: -----')
-    write_errors('----- Jurl Java Parser '+  str(datetime.date) + ' : -----', "./grammarGeneration_output/JurlJavaResults.txt")
+    write_errors('----- Jurl Java Parser : -----', "./grammarGeneration_output/JurlJavaResults.txt")
     for url in url_lines:
         try:
             print()

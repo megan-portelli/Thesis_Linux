@@ -1,7 +1,6 @@
 from typing import List, Dict, Tuple
 import subprocess
 import FuzzingBook_Generational
-from datetime import datetime
 
 Grammar = Dict[str, List[Tuple]]
 
@@ -58,7 +57,7 @@ url_lines = []
 parsers = []
 
 def create_new(data):
-    path = "./grammarGeneration_output/generational_urls.txt"
+    path = "./grammarGeneration_output/java_generational_urls.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
@@ -73,7 +72,7 @@ def write_errors(data, path):
         print(e)
 
 def main():
-    for i in range(2):
+    for i in range(10000):
         url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
     
     #Writing to file just to have them in a separate text file
@@ -85,7 +84,7 @@ def main():
 
 def galimatias_execute_fuzz(): 
     print('----- Galimatias Java Parser: -----')
-    write_errors('----- Galimatias Java Parser '+  str(datetime.date()) + ': -----', "./grammarGeneration_output/GalimatiasJavaResults.txt")
+    write_errors('----- Galimatias Java Parser : -----', "./grammarGeneration_output/GalimatiasJavaResults.txt")
     for url in url_lines:
         try:
             print()
@@ -109,7 +108,7 @@ def galimatias_execute_fuzz():
 
 def jurl_execute_fuzz():
     print('----- Jurl Java Parser: -----')
-    write_errors('----- Jurl Java Parser '+  str(datetime.date) + ' : -----', "./grammarGeneration_output/JurlJavaResults.txt")
+    write_errors('----- Jurl Java Parser : -----', "./grammarGeneration_output/JurlJavaResults.txt")
     for url in url_lines:
         try:
             print()

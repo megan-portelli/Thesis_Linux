@@ -66,7 +66,7 @@ parsers = [
     ["./parsers/yuarel_V2016/main", '"%s"', ["Invalid URL"] ],
 ]
 def create_new(data):
-    path = "./grammarGeneration_output/generational_urls.txt"
+    path = "./grammarGeneration_output/C_generational_urls.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
@@ -82,7 +82,7 @@ def write_errors(data):
         print(e)
 
 def main():
-    for i in range(5):
+    for i in range(10000):
         url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
     
     #Writing to file just to have them in a separate text file
@@ -94,7 +94,7 @@ def main():
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[0])
-        write_errors('----- Parser: %s '+  str(datetime.date()) + ' -----' % parser[0])
+        write_errors('----- Parser: %s -----' % parser[0])
         for url in url_lines:
             param = parser[1] % url
             try:

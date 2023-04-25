@@ -1,8 +1,6 @@
 import os
 import subprocess
 import FuzzingBook_Mutational
-from datetime import datetime
-
 
 url_lines = []
 
@@ -66,7 +64,7 @@ def write_errors(data):
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[1])
-        write_errors('----- Parser: %s '+  str(datetime.date()) + ' -----' % parser[0])
+        write_errors('----- Parser: %s -----' % parser[0])
         for url in url_lines:
             param = parser[2] % url
             try:

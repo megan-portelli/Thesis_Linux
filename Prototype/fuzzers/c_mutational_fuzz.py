@@ -1,8 +1,6 @@
 import os
 import subprocess
 import FuzzingBook_Mutational
-from datetime import datetime
-
 
 url_lines = []
 
@@ -15,8 +13,6 @@ parsers = [
     ["./parsers/url.h_V2013/main", '"%s"', ["Invalid URL"] ],
     ["./parsers/yuarel/main", '"%s"', ["Invalid URL"] ],
     ["./parsers/yuarel_V2016/main", '"%s"', ["Invalid URL"] ],
-    ["./parsers/furl/main", '"%s"', ["Invalid URL"] ],
-    ["./parsers/py-url-parser/main", '"%s"', ["Invalid URL"] ]
 ]
 
 input_folders = [
@@ -43,7 +39,7 @@ def main():
 
     for url in url_lines:
         counter = 0
-        while counter < 51:
+        while counter < 100:
             mutated_url = FuzzingBook_Mutational.mutate(url)
             create_new(mutated_url)
             counter+=1
@@ -52,7 +48,7 @@ def main():
     execute_fuzz()
 
 def create_new(data):
-    path = "./mutation_output/mutation_urls.txt"
+    path = "./mutation_output/C_mutation_urls.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
@@ -70,7 +66,7 @@ def write_errors(data):
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[0])
-        write_errors('----- Parser: %s '+  str(datetime.date()) + ' -----' % parser[0])
+        write_errors('----- Parser: %s -----' % parser[0])
         for url in url_lines:
             param = parser[1] % url
             try:
@@ -91,6 +87,10 @@ def execute_fuzz():
             except subprocess.TimeoutExpired:
                 print('Timed out', param)
                 write_errors('Timed out: %s' % param)
+            except ValueError:
+                print('Embedded null byte', param)
+                write_errors('Embedded null byte: %s' % param)
+
 
 def get_output(result):
     output = result.stderr.decode('utf-8')
