@@ -40,7 +40,7 @@ def main():
     jurl_execute_fuzz()
 
 def create_new(data):
-    path = "./mutation_output/mutation_urls.txt"
+    path = "./mutation_output/java_mutation_urls.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")

@@ -65,7 +65,7 @@ parsers = [
 
 
 def create_new(data):
-    path = "./grammarGeneration_output/generational_urls.txt"
+    path = "./grammarGeneration_output/python_generational_urls.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
