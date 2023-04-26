@@ -60,7 +60,7 @@ def galimatias_execute_fuzz():
     for url in url_lines:
         try:
             print()
-            result = subprocess.run(['java', '-cp','galimatias-0.2.1.jar:icu4j-72.1.jar','io.mola.galimatias.cli.CLI', "\"" + url + "\""],
+            result = subprocess.run(['java', '-cp','./fuzzers/galimatias-0.2.1.jar:./fuzzers/icu4j-72.1.jar','io.mola.galimatias.cli.CLI', "\"" + url + "\""],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
             output = get_output(result)
             #If the length of the ouput is greater than 0 than the input file has failed

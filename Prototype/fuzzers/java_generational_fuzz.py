@@ -87,7 +87,6 @@ def galimatias_execute_fuzz():
     write_errors('----- Galimatias Java Parser : -----', "./grammarGeneration_output/GalimatiasJavaResults.txt")
     for url in url_lines:
         try:
-            print()
             result = subprocess.run(['java', '-cp','./fuzzers/galimatias-0.2.1.jar:./fuzzers/icu4j-72.1.jar','io.mola.galimatias.cli.CLI', "\"" + url + "\""],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
             output = get_output(result)

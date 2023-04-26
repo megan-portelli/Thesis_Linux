@@ -68,7 +68,6 @@ def execute_fuzz():
         for url in url_lines:
             param = parser[2] % url
             try:
-                print()
                 result = subprocess.run([parser[0], parser[1], param], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
                 output = get_output(result)
                 #If the length of the ouput is greater than 0 than the input file has failed
