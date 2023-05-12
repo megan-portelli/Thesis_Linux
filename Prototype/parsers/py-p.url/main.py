@@ -9,6 +9,6 @@ try:
     parsedURL = Purl(url)
     print(parsedURL)
 except exceptions.InvalidUrlError as e :
-    print("Exception occurred for url '"+ url + "': "+ str(type(e)))
+        print("Invalid URL")#+ url + "': "+ str(type(e)))print("Exception occurred for url '"+ url + "': "+ str(type(e)))
 except Exception as ex:
-    print("Exception occurred for url '"+ url + "': "+ str(type(ex)))
+        print("Invalid URL")#+ url + "': "+ str(type(e)))print("Exception occurred for url '"+ url + "': "+ str(type(ex)))

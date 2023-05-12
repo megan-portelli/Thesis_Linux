@@ -7,4 +7,4 @@ url = sys.argv[1]
 try:
     parsedURL = parse_url(url)
 except Exception as e:
-    print("Exception occurred for url '"+ url + "': "+ str(type(e)))
+        print("Invalid URL")#+ url + "': "+ str(type(e)))print("Exception occurred for url '"+ url + "': "+ str(type(e)))

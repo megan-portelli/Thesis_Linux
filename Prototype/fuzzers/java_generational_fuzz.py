@@ -87,7 +87,7 @@ def galimatias_execute_fuzz():
     write_errors('----- Galimatias Java Parser : -----', "./grammarGeneration_output/GalimatiasJavaResults.txt")
     for url in url_lines:
         try:
-            result = subprocess.run(['java', '-cp','./fuzzers/galimatias-0.2.1.jar:./fuzzers/icu4j-72.1.jar','io.mola.galimatias.cli.CLI', "\"" + url + "\""],
+            result = subprocess.run(['java', '-cp','./fuzzers/galimatias.jar:./fuzzers/icu4j-72.1.jar','io.mola.galimatias.cli.CLI', "\"" + url + "\""],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
             output = get_output(result)
             #If the length of the ouput is greater than 0 than the input file has failed
@@ -104,6 +104,9 @@ def galimatias_execute_fuzz():
         except subprocess.TimeoutExpired:
             print('Timed out', url)
             write_errors('Timed out: %s' % url)
+        except ValueError:
+                print('Embedded null byte', url)
+                write_errors('Embedded null byte: %s' % url, "./grammarGeneration_output/GalimatiasJavaResults.txt")
 
 def jurl_execute_fuzz():
     print('----- Jurl Java Parser: -----')
@@ -127,7 +130,7 @@ def jurl_execute_fuzz():
                     write_errors(str(result), "./grammarGeneration_output/JurlJavaResults.txt")
         except subprocess.TimeoutExpired:
             print('Timed out', url)
-            write_errors('Timed out: %s' % url)
+            write_errors('Timed out: %s' % url, "./grammarGeneration_output/JurlJavaResults.txt")
  
 
 def get_output(result):

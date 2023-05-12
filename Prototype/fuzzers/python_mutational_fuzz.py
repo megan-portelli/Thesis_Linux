@@ -5,9 +5,9 @@ import FuzzingBook_Mutational
 url_lines = []
 
 parsers = [
-    ["python3","./parsers/furl/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-furl/main.py", '"%s"', ["Invalid URL"] ],
     ["python3","./parsers/py-url-parser/main.py", '"%s"', ["Invalid URL"] ],
-    ["python3","./parsers/whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
     ["python3","./parsers/py-urltools/main.py", '"%s"', ["Invalid URL"] ],
     ["python3","./parsers/py-p.url/main.py", '"%s"', ["Invalid URL"] ],
 
@@ -64,7 +64,7 @@ def write_errors(data):
 def execute_fuzz(): 
    for parser in parsers:
         print('----- Parser: %s -----' % parser[1])
-        write_errors('----- Parser: %s -----' % parser[0])
+        write_errors('----- Parser: %s -----' % parser[1])
         for url in url_lines:
             param = parser[2] % url
             try:
@@ -84,6 +84,10 @@ def execute_fuzz():
             except subprocess.TimeoutExpired:
                 print('Timed out', param)
                 write_errors('Timed out: %s' % param)
+            except ValueError:
+                write_errors('Embedded null byte: %s' % param)
+                break
+
 
 def get_output(result):
     output = result.stderr.decode('utf-8')
