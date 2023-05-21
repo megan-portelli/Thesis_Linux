@@ -781,7 +781,8 @@ http:?/2001:db8::1/foo
 http://2001:dj8::1/foo		
 http://2001:db8::!/foo		
 http://2005:db8::1/foo		
-http://2001:db8::1/foo	
+http://2001:db8::1/foo
+	
 http://201:db8::1/foo		
 http://2001:db8::1/fog		
 http://2001:db8:4:1/foo		
@@ -4851,7 +4852,8 @@ ssh-httx-ftp://google.com
 ssh-http-ftp://googlecom
 ssh-http,-ftp://google.com
 ssh-http-ftp://google.cmm
-sshhttp-ftp://google.com
+ssh
+http-ftp://google.com
 ssh-http-ftp://google.coem
 ssh-http-ftp://goWogle.com
 ssh-httpq-ftp://google.com
