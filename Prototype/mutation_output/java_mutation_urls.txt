@@ -538,7 +538,7 @@ http://aaa:bbb@ex}ample.com
 http://aaa:bbb@example.bom
 http://aaa:bbb@ehample.com
 http://aaa:bbb@example.Acom
-http://aaa:bbb example.com
+http://aaa:bbb@example.com
 http://kaaa:bbb@example.com
 http://aaa:bbb@example.coVm
 http://aaa:bbb@example.c?om
@@ -575,7 +575,7 @@ http://aaa@example.ckm
 http://aaaBexample.com
 http://aaa@example.)com
 http://aaa@exaMple.com
-http://aaa example.com
+http://aaa@example.com
 http://aaa@examp)le.com
 http://aaa@example.col
 http://aaa@examp|e.com
@@ -2596,7 +2596,7 @@ http:/aaa:bbb@/
 http://aaa:bbb@B/
 htp://aaa:bbb@/
 h|ttp://aaa:bbb@/
-http://aaa:bbb /
+http://aaa:bbb@/
 http//aaa:bbb@/
 httx://aaa:bbb@/
 httrp://foo[bar].com/
@@ -2826,7 +2826,7 @@ $ \t
   \?t
   t
 ` \t
-  \t
+ @\t
  0\t
  0\t
   \tV
@@ -2848,9 +2848,9 @@ $ \t
   \
   |t
   ]t
-  \t
+ @\t
   c\t
-  \t
+@ \t
  \t
   \*t
   t
@@ -2858,7 +2858,7 @@ http://f: 21 / b ?m d # e
 http://f: 21 / b ?$d # e 
 htt2p://f: 21 / b ? d # e 
 hutp://f: 21 / b ? d # e 
-http://f: 21 / b ? d # e 
+http://f: 21 / b ? d # e@
 http//f: 21 / b ? d # e 
 http://f: 21 / b ? d # e &
 http://f: 21 / b ? Ld # e 
@@ -2883,7 +2883,7 @@ http://kf: 21 / b ? d # e
 http://f: 21 / bo ? d # e 
 http://f: 21/ b ? d # e 
 htt://f: 21 / b ? d # e 
-http://f: 21 / b ? d # e 
+http://f: 21 / b ?@d # e 
 http://f: 21 / b ? d #  
 http://f:21 / b ? d # e 
 http://f: 2]1 / b ? d # e 
@@ -4584,7 +4584,7 @@ http//foo:💀@example.com/bar
 http://foo:💀@exampl_e.com/bar
 http://goo:💀@example.com/bar
 http://foo:💀@exaople.com/bar
-http://foo:💀 example.com/bar
+http://foo:💀@example.com/bar
 http:j//foo:💀@example.com/bar
 http://foo:💀@xample.com/bar
 http://f<oo:💀@example.com/bar
@@ -4788,7 +4788,7 @@ https://localhost:3000/jqueEryui@1.2.3
 https://ocalhost:3000/jqueryui@1.2.3
 https://ocalhost:3000/jqueryui@1.2.3
 https://localhost:3000+jqueryui@1.2.3
-https://localhost:3000/jqueryui 1.2.3
+https://localhost:3000/jqueryui@1.2.3
 https://localhost:300/jqueryui@1.2.3
 https://localhost:3000/jqueryui@q.2.3
 httaps://localhost:3000/jqueryui@1.2.3

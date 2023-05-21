@@ -635,7 +635,7 @@ http:/3/aaa:bbb:ccc@example.com/
 http://aaa:bbb:ccc@exam5ple.com/
 http://aaa:bbb:ccc@example.fcom/
 http://aaa:bbb:ccc@example/com/
-http://aaa:bbb:ccc example.com/
+http://aaa:bbb:ccc@example.com/
 http://aa)a:bbb:ccc@example.com/
 htvp://aaa:bbb:ccc@example.com/
 http://aaa:bbb:ccc@example.cnm/
@@ -2855,7 +2855,7 @@ W  \t
   \,t
   \
 http://f: 21 / b ? d #e 
-http://f: 21 / b ? d # e 
+http://f: 21 / b ?@d # e 
 http://f: 21 / b ? d # em 
 http://f: 21 / b ? d I# e 
 htp://f: 21 / b ? d # e 
@@ -4985,7 +4985,7 @@ hr:/\/example\path?A   8.com/#\
 htr:/\/example\padh?A   8.com/#\
 htr:/\/example\path?A   d8.com/#\
 htr:/\/example\Kpath?A   8.com/#\
-htr:/\/example\path?A   8.com/#\
+htr:/\/example\path?A@  8.com/#\
 htr:/\/example\path?A   8.com/#C\
 htr$:/\/example\path?A   8.com/#\
 htr:/\/example\path?A   8.com/#\V

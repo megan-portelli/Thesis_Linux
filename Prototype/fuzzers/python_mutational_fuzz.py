@@ -17,30 +17,34 @@ input_folders = [
     "./input/",
 ]
 
+
+#ADD LOGS
+#COMMENT OUT CREATE NEW METHOD
+#FIX @ IN INPUT FILES FROM https://hexed.it/
 mutation_folder = [
     "./mutation_output/",
 ]
 
 def load_urls(folder):
     for path in folder:
-        for file in os.listdir(path):
-            if file.endswith('.txt'):
-                file1 = open(path+file, 'r', encoding='utf-8')#, errors='ignore')
-                Lines = file1.read().splitlines()
-                file1.close()
-                for line in Lines: 
-                    url_lines.append(line)
+    #     for file in os.listdir(path):
+    #         if file.endswith('.txt'):
+        file = open(path+"python_mutation_urls (copy).txt", 'r', encoding='utf-8')#, errors='ignore')
+        Lines = file.read().splitlines()
+        file.close()
+        for line in Lines: 
+            url_lines.append(line)
 
 
 def main():    
-    load_urls(input_folders)
+    # load_urls(input_folders)
 
-    for url in url_lines:
-        counter = 0
-        while counter < 51:
-            mutated_url = FuzzingBook_Mutational.mutate(url)
-            create_new(mutated_url)
-            counter+=1
+    # for url in url_lines:
+    #     counter = 0
+    #     while counter < 51:
+    #         mutated_url = FuzzingBook_Mutational.mutate(url)
+    #         create_new(mutated_url)
+    #         counter+=1
     
     load_urls(mutation_folder)
     execute_fuzz()
@@ -68,6 +72,7 @@ def execute_fuzz():
         for url in url_lines:
             param = parser[2] % url
             try:
+                write_errors("info.Starting process for url: %s" % param)
                 result = subprocess.run([parser[0], parser[1], param], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
                 output = get_output(result)
                 #If the length of the ouput is greater than 0 than the input file has failed
@@ -76,11 +81,14 @@ def execute_fuzz():
                     for expected_out in parser[3]:
                         if expected_out in output:
                             expected = True
+                            write_errors("info.URL %s parsed with expected error" % param)
                             break
                             
                     if not expected or result.returncode != 0:
                         print(result)
                         write_errors(str(result))
+                else:
+                    write_errors("info.URL %s parsed successfully with no errors" % param)
             except subprocess.TimeoutExpired:
                 print('Timed out', param)
                 write_errors('Timed out: %s' % param)

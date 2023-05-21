@@ -4,5 +4,7 @@ import sys
 url = sys.argv[1]
 try:
     f = furl(url)
+    if not url.isvalid:
+        raise Exception()
 except Exception as e:
-    print("Invalid URL")#+ url + "': "+ str(type(e)))
+    sys.stderr.write("Invalid URL")

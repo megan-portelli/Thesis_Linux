@@ -1,14 +1,15 @@
-from purl import Purl, exceptions
+from purl import *
 import sys
 
-#noticing that there are differences when parsing backslashes in this parser and in other parsers
-#could be interesting to use it when discussing results since this is whatwg compliant and browsers
-#are compliant with that standard
+# #noticing that there are differences when parsing backslashes in this parser and in other parsers
+# #could be interesting to use it when discussing results since this is whatwg compliant and browsers
+# #are compliant with that standard
 url = sys.argv[1]
 try:
-    parsedURL = Purl(url)
-    print(parsedURL)
+    parsedURL = url(url)
+    if parsedURL.is_valid == False:
+        raise exceptions.InvalidUrlError()
 except exceptions.InvalidUrlError as e :
-        print("Invalid URL")#+ url + "': "+ str(type(e)))print("Exception occurred for url '"+ url + "': "+ str(type(e)))
+    sys.stderr.write("Invalid URL")
 except Exception as ex:
-        print("Invalid URL")#+ url + "': "+ str(type(e)))print("Exception occurred for url '"+ url + "': "+ str(type(ex)))
+     sys.stderr.write("Invalid URL")
