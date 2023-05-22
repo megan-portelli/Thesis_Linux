@@ -36,7 +36,7 @@ def main():
     
     load_urls(mutation_folder)
     galimatias_execute_fuzz()
-    jurl_execute_fuzz()
+    #jurl_execute_fuzz()
 
 def create_new(data):
     path = "./mutation_output/java_mutation_urls.txt"
@@ -59,7 +59,7 @@ def galimatias_execute_fuzz():
     write_errors('----- Galimatias Java Parser : -----', "./mutation_output/GalimatiasJavaResults.txt")
     for url in url_lines:
         try:
-            write_errors("info.Starting process for url: %s" % url, "./mutation_output/GalimatiasJavaResults.txt")
+            write_errors("info. Starting process for url: %s" % url, "./mutation_output/GalimatiasJavaResults.txt")
             result = subprocess.run(['java', '-cp','./fuzzers/galimatias.jar:./fuzzers/icu4j-72.1.jar','io.mola.galimatias.cli.CLI', "\"" + url + "\""],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
             output = get_output(result)
@@ -68,7 +68,7 @@ def galimatias_execute_fuzz():
             #If the length of the ouput is greater than 0 than the input file has failed
             if len(output) > 0:
                 expected = False
-                write_errors("info.Error as expected for url: %s" % url, "./mutation_output/GalimatiasJavaResults.txt")
+                write_errors("info. Error as expected for url: %s" % url, "./mutation_output/GalimatiasJavaResults.txt")
                 # for expected_out in parser[2]:
                 #     if expected_out in output:
                 #         expected = True
@@ -77,8 +77,9 @@ def galimatias_execute_fuzz():
                 if not expected or result.returncode != 0:
                     print(result)
                     write_errors(str(result), "./mutation_output/GalimatiasJavaResults.txt")
-            # else:
-            #     write_errors("info.Url parsed successfully: %s" % url, "./mutation_output/GalimatiasJavaResults.txt")
+            else:
+                write_errors("info. URL parsed successfully: %s" % url, "./mutation_output/GalimatiasJavaResults.txt")
+
         except subprocess.TimeoutExpired:
             print('Timed out', url)
             write_errors('Timed out: %s' % url, "./mutation_output/GalimatiasJavaResults.txt")
@@ -91,14 +92,14 @@ def jurl_execute_fuzz():
     write_errors('----- Jurl Java Parser : -----', "./mutation_output/JurlJavaResults.txt")
     for url in url_lines:
         try:
-            write_errors("info.Starting process for url: %s" % url, "./mutation_output/JurlJavaResults.txt")
+            write_errors("info. Starting process for url: %s" % url, "./mutation_output/JurlJavaResults.txt")
             result = subprocess.run(['java', '-cp','.:jurl-v0.4.2.jar','com.example.App', "\"" + url + "\""],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
             output = get_output(result)
             #If the length of the ouput is greater than 0 than the input file has failed
             if len(output) > 0:
                 expected = False
-                write_errors("info.Error as expected for url: %s" % url, "./mutation_output/JurlJavaResults.txt")
+                write_errors("info. Error as expected for url: %s" % url, "./mutation_output/JurlJavaResults.txt")
                 # for expected_out in parser[2]:
                 #     if expected_out in output:
                 #         expected = True
