@@ -4868,7 +4868,8 @@ ssh-http-ftp//google.com
 ssha-http-ftp://google.com
 ssh-http-ftp://goole.com
 ssh-http-ftp://gmogle.com
-sshhttp-ftp://google.com
+ssh
+http-ftp://google.com
 ssh-httpftp://google.com
 ssh-http-ft0://google.com
 ssh-http-ftp://google.om

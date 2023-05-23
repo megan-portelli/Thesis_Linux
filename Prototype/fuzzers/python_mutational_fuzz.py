@@ -29,15 +29,24 @@ def load_urls(folder):
     for path in folder:
     #     for file in os.listdir(path):
     #         if file.endswith('.txt'):
-        file = open(path+"python_mutation_urls (copy).txt", 'r', encoding='utf-8')#, errors='ignore')
+        file = open(path+"python_mutation_urls2.txt", 'r', encoding='utf-8')#, errors='ignore')
         Lines = file.read().splitlines()
         file.close()
         for line in Lines: 
             url_lines.append(line)
 
+def load_urls_input(folder):
+    for path in folder:
+        for file in os.listdir(path):
+            if file.endswith('.txt'):
+                file = open(path+"urls.txt", 'r', encoding='utf-8')#, errors='ignore')
+                Lines = file.read().splitlines()
+                file.close()
+                for line in Lines: 
+                    url_lines.append(line)
 
 def main():    
-    # load_urls(input_folders)
+    # load_urls_input(input_folders)
 
     # for url in url_lines:
     #     counter = 0
@@ -50,7 +59,7 @@ def main():
     execute_fuzz()
 
 def create_new(data):
-    path = "./mutation_output/python_mutation_urls.txt"
+    path = "./mutation_output/python_mutation_urls2.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")
@@ -58,7 +67,7 @@ def create_new(data):
         print(e)
 
 def write_errors(data):
-    path = "./mutation_output/PythonResults.txt"
+    path = "./mutation_output/PythonResults2.txt"
     try:
         with open(path, 'a', encoding="utf-8") as f:
             f.write(data+"\n")

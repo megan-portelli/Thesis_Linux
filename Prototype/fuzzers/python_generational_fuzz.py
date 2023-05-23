@@ -55,10 +55,10 @@ URL_GRAMMAR: Grammar = {
 url_lines = []
 
 parsers = [
-    ["python3","./parsers/py-furl/main.py", '"%s"', ["Invalid URL"] ],
-    ["python3","./parsers/py-url-parser/main.py", '"%s"', ["Invalid URL"] ],
-    ["python3","./parsers/py-whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
-    ["python3","./parsers/py-urltools/main.py", '"%s"', ["Invalid URL"] ],
+    # ["python3","./parsers/py-furl/main.py", '"%s"', ["Invalid URL"] ],
+    # ["python3","./parsers/py-url-parser/main.py", '"%s"', ["Invalid URL"] ],
+    # ["python3","./parsers/py-whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
+    # ["python3","./parsers/py-urltools/main.py", '"%s"', ["Invalid URL"] ],
     ["python3","./parsers/py-p.url/main.py", '"%s"', ["Invalid URL"] ],
 ]
 
@@ -80,14 +80,24 @@ def write_errors(data):
     except Exception as e:
         print(e)
 
-def main():
-    for i in range(10000):
-        url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
-    
-    #Writing to file just to have them in a separate text file
-    for url in url_lines:
-        create_new(url)
+def load_urls():
+    #     for file in os.listdir(path):
+    #         if file.endswith('.txt'):
+    file = open("./grammarGeneration_output/python_generational_urls.txt", 'r', encoding='utf-8')#, errors='ignore')
+    Lines = file.read().splitlines()
+    file.close()
+    for line in Lines: 
+        url_lines.append(line)
 
+def main():
+    # for i in range(10000):
+    #     url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
+    
+    # #Writing to file just to have them in a separate text file
+    # for url in url_lines:
+    #     create_new(url)
+
+    load_urls()
     execute_fuzz()
 
 def execute_fuzz(): 
@@ -97,6 +107,7 @@ def execute_fuzz():
         for url in url_lines:
             param = parser[2] % url
             try:
+                write_errors("info. Starting process for url: %s" % param)
                 result = subprocess.run([parser[0], parser[1], param], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
                 output = get_output(result)
                 #If the length of the ouput is greater than 0 than the input file has failed
@@ -105,14 +116,22 @@ def execute_fuzz():
                     for expected_out in parser[3]:
                         if expected_out in output:
                             expected = True
+                            write_errors("info. URL %s parsed with expected error" % param)
                             break
                             
                     if not expected or result.returncode != 0:
                         print(result)
                         write_errors(str(result))
+                else:
+                    write_errors("info. URL %s parsed successfully with no errors" % param)
+
             except subprocess.TimeoutExpired:
                 print('Timed out', param)
                 write_errors('Timed out: %s' % param)
+            except ValueError:
+                write_errors('Embedded null byte: %s' % param)
+                break
+
 
 def get_output(result):
     output = result.stderr.decode('utf-8')
