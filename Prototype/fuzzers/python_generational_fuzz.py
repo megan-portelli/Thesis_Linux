@@ -55,10 +55,10 @@ URL_GRAMMAR: Grammar = {
 url_lines = []
 
 parsers = [
-    # ["python3","./parsers/py-furl/main.py", '"%s"', ["Invalid URL"] ],
-    # ["python3","./parsers/py-url-parser/main.py", '"%s"', ["Invalid URL"] ],
-    # ["python3","./parsers/py-whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
-    # ["python3","./parsers/py-urltools/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-furl/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-url-parser/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-whatwg-url/main.py", '"%s"', ["Invalid URL"] ],
+    ["python3","./parsers/py-urltools/main.py", '"%s"', ["Invalid URL"] ],
     ["python3","./parsers/py-p.url/main.py", '"%s"', ["Invalid URL"] ],
 ]
 
@@ -81,8 +81,6 @@ def write_errors(data):
         print(e)
 
 def load_urls():
-    #     for file in os.listdir(path):
-    #         if file.endswith('.txt'):
     file = open("./grammarGeneration_output/python_generational_urls.txt", 'r', encoding='utf-8')#, errors='ignore')
     Lines = file.read().splitlines()
     file.close()
@@ -90,12 +88,12 @@ def load_urls():
         url_lines.append(line)
 
 def main():
-    # for i in range(10000):
-    #     url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
+    for i in range(10000):
+        url_lines.append(FuzzingBook_Generational.generateInputs(grammar=URL_GRAMMAR, max_nonterminals=10, log=False))
     
-    # #Writing to file just to have them in a separate text file
-    # for url in url_lines:
-    #     create_new(url)
+    #Writing to file just to have them in a separate text file
+    for url in url_lines:
+        create_new(url)
 
     load_urls()
     execute_fuzz()

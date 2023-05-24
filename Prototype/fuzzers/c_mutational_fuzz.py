@@ -25,8 +25,6 @@ mutation_folder = [
 
 def load_urls(folder):
    for path in folder:
-    #     for file in os.listdir(path):
-    #         if file.endswith('.txt'):
         file = open(path+"C_mutation_urls.txt", 'r', encoding='utf-8')#, errors='ignore')
         Lines = file.read().splitlines()
         file.close()
@@ -35,14 +33,14 @@ def load_urls(folder):
 
 
 def main():    
-    # load_urls(input_folders)
+    load_urls(input_folders)
 
-    # for url in url_lines:
-    #     counter = 0
-    #     while counter < 100:
-    #         mutated_url = FuzzingBook_Mutational.mutate(url)
-    #         create_new(mutated_url)
-    #         counter+=1
+    for url in url_lines:
+        counter = 0
+        while counter < 100:
+            mutated_url = FuzzingBook_Mutational.mutate(url)
+            create_new(mutated_url)
+            counter+=1
     
     load_urls(mutation_folder)
     execute_fuzz()
