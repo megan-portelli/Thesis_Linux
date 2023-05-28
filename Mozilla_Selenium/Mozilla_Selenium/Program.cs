@@ -7,9 +7,9 @@
 /// any exceptions will be recorded in a text file for further investigation.
 /// </summary>
 
-List<string> inputs = System.IO.File.ReadAllLines("C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Inputs\\generational_urls.txt").ToList();
-string resultFilePath = "C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Results\\GenerationalResults.txt";
-string logsFilePath = "C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Logs\\GenerationalLogs.txt";
+List<string> inputs = System.IO.File.ReadAllLines("C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Inputs\\mutational_urls.txt").ToList();
+string resultFilePath = "C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Results\\MutationalResults.txt";
+string logsFilePath = "C:\\Users\\Win10 User\\source\\repos\\Thesis_Linux\\Mozilla_Selenium\\Mozilla_Selenium\\Logs\\MutationalLogs.txt";
 
 var options = new FirefoxOptions();
 
