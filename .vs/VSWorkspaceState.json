@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Mozilla_Selenium"
   ],
-  "SelectedNode": "\\Mozilla_Selenium.sln",
+  "SelectedNode": "\\Mozilla_Selenium\\Mozilla_Selenium.sln",
   "PreviewInSolutionExplorer": false
 }
