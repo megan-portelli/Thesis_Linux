@@ -3,7 +3,8 @@ import sys
 
 #pip install url-parser
 
+url = sys.argv[1]
 try:
-    url = parse_url(sys.argv[1])
+    parsedURL = parse_url(url)
 except Exception as e:
-    print (e) + "Invalid URL"
+    sys.stderr.write("Invalid URL")
